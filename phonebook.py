@@ -1,3 +1,4 @@
+
 def sho_oll(file_name: str):
     print('\n\tВесь список телефонов:\n')
     with open(file_name,'r',encoding='utf-8') as fl:
@@ -11,11 +12,20 @@ def add_new(file_name: str):
     last_name = input('Введите фамилию: ')
     first_name = input('Введите имя: ')
     surname = input('Введите отчество: ')
-    phone_number = input('Введите номер телефона: ')
+    phone_number = input('Введите номер по шаблону: +7(***)***-**-** -> ')
+    input_number_phone(phone_number) 
     with open(file_name,'a',encoding='utf-8') as fl:    
         fl.write(f'{last_name}, {first_name:}, {surname:}, {phone_number}\n' )
         print("\033[32m{}\033[0m".format('\nНовый абонент и его номер телефона добавлены в справочник, спасибо.'))
 
+
+def input_number_phone(phone_number): 
+    sample = '0123456789()+-'        
+    for i in range(len(phone_number)):
+        if phone_number[i] not in sample or phone_number[6] != ')' or phone_number[10] != '-' or phone_number[13] != '-' or len(phone_number) != 16:
+            print('Такая запись номера не допустима!')
+            break
+    return phone_number
 
 def del_number(file_name: str):
     print("\033[31m{}\033[0m".format('\tУдаление данных из списка:\n'))
@@ -89,9 +99,8 @@ def find_number(file_name: str):
     else:
         print('Такой операции для поиска у нас нет')
         
-
-def main():
-    
+        
+def main():   
     file_name = ('phoneBook.txt')
     stop = False
     str = '12345x'

@@ -1,7 +1,7 @@
-
-def sho_oll(file_name: str):
+inf = '\n\tВесь список телефонов:\n'
+def sho_oll(file_name, inf: str):
     count = 0
-    print('\n\tВесь список телефонов:\n')
+    print(inf)
     with open(file_name,'r',encoding='utf-8') as fl:
         data = fl.readlines()
         data.sort(key = lambda user: user[0])
@@ -10,7 +10,7 @@ def sho_oll(file_name: str):
             print(count,"\033[34m{}\033[0m".format("".join(data[i])))
           
 
-def copy_number(file_name, copy_file: str):
+def copy_number(file_name, temp_file, copy_file: str):
     count = 0
     print('\n\tВесь список телефонов:\n')
     with open(file_name,'r',encoding='utf-8') as fl:
@@ -20,10 +20,18 @@ def copy_number(file_name, copy_file: str):
             count += 1
             print(count,"\033[34m{}\033[0m".format("".join(data[i]))) 
     copy_line = int(input ('Введите номер строки копирования ->'))   
-    with open(copy_file,'a',encoding='utf-8') as fl_copy:
+    with open(temp_file,'a',encoding='utf-8') as fl_copy:
         fl_copy.write(data[copy_line-1])
-        print("\033[34m{}\033[0m".format('\nАбонент и его номер телефона добавлены в новый справочник "new_phonebook", спасибо.'))  
-
+        temp = set()
+    with open(temp_file,'r',encoding='utf-8') as fl_copy:
+         flc = fl_copy.readlines()   
+    for line in  flc:
+        temp.add(line)
+    with open(copy_file,'w',encoding='utf-8') as fl_copy:
+        fl_copy.writelines(temp) 
+    print("\033[34m{}\033[0m".format('\nАбонент и его номер телефона добавлены в новый справочник "new_phonebook", спасибо.')) 
+    inf = '\n\tНовый справочник:\n' 
+    sho_oll(copy_file, inf)
 
 def add_new(file_name: str):
     print("\033[32m{}\033[0m".format('\tДобавление номера в список:\n'))
@@ -120,6 +128,7 @@ def find_number(file_name: str):
         
 def main():   
     file_name = ('phoneBook.txt')
+    temp_file = ('temp.txt')
     copy_file = ('new_ponebook.txt') 
     stop = False
     str = '123456x'
@@ -146,7 +155,7 @@ def main():
             elif answer =='5':
                 find_number(file_name)
             elif answer =='6':
-                copy_number(file_name,copy_file)         
+                copy_number(file_name,temp_file,copy_file)         
             elif answer == 'x':
                 print('\nСпасибо за обращение к справочнику.')
                 stop = True

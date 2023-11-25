@@ -13,5 +13,5 @@
 5. Поиск нужного номера
 6. Копия нужного номера
 7. Отказ от обращения к справочнику
-8. 
+ 
 ![phone](https://github.com/VyacheslavChik22/phonebook_task/assets/99678206/83a4aa29-954c-4e81-b6b3-5845d109bf55)

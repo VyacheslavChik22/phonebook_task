@@ -145,7 +145,7 @@ def main():
         answer = input('\nВведите нужную операцию -> ')
         if answer in str:
             if answer == '1':
-                sho_oll(file_name)
+                sho_oll(file_name, inf)
             elif answer =='2':
                 add_new(file_name)
             elif answer =='3':
